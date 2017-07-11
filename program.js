@@ -1,9 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-fs.readdir(process.argv[2], 'utf-8', (err, data) => {
+const mymodule = require('./mymodule');
+mymodule(process.argv[2], process.argv[3], (err, data) => {
+  if (err) {
+    throw new Error(err);
+  }
+
   data.forEach(name => {
-    if (path.extname(name) === `.${process.argv[3]}`) {
-      console.log(name);
-    }
+    console.log(name);
   });
 });
