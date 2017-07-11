@@ -1,1 +1,2 @@
-console.log(process.argv.slice(2).reduce((sum, number) => sum + Number(number), 0));
+const fs = require('fs');
+console.log(fs.readFileSync(process.argv[2]).toString().split('\n').length - 1);
