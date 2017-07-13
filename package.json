@@ -4,7 +4,8 @@
   "description": "",
   "main": "mymodule.js",
   "dependencies": {
-    "bl": "^1.2.1"
+    "bl": "^1.2.1",
+    "through2-map": "^3.0.0"
   },
   "devDependencies": {},
   "scripts": {
