@@ -1,15 +1,6 @@
-const http = require('http');
-const bl = require('bl');
-const result = [];
-const args = process.argv.slice(2);
-const length = args.length;
-args.forEach((arg, index) => {
-  http.get(arg, res => {
-    res.pipe(bl((err, data) => {
-      result[index] = data.toString();
-      if (result.length === length) {
-        result.forEach(value => console.log(value));
-      }
-    }));
-  }).on('error', console.error);
-});
+const net = require('net')
+const zero = i => (i < 10 ? '0' : '') + i;
+const now = date => `${date.getFullYear()}-${zero(date.getMonth() + 1)}-${zero(date.getDate())} ${zero(date.getHours())}:${zero(date.getMinutes())}`;
+net.createServer(socket => {
+  socket.end(`${now(new Date())}\n`);
+}).listen(Number(process.argv[2]));
