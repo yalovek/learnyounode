@@ -1,10 +1,5 @@
-const mymodule = require('./mymodule');
-mymodule(process.argv[2], process.argv[3], (err, data) => {
-  if (err) {
-    throw new Error(err);
-  }
-
-  data.forEach(name => {
-    console.log(name);
-  });
-});
+const http = require('http');
+http.get(process.argv[2], res => {
+  res.setEncoding('utf8');
+  res.on('data', console.log);
+}).on('error', console.error);
