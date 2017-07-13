@@ -1,5 +1,9 @@
 const http = require('http');
+const bl = require('bl');
 http.get(process.argv[2], res => {
-  res.setEncoding('utf8');
-  res.on('data', console.log);
+  res.pipe(bl((err, data) => {
+    data = data.toString();
+    console.log(data.length);
+    console.log(data);
+  }));
 }).on('error', console.error);
