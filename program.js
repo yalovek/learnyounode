@@ -1,9 +1,15 @@
 const http = require('http');
 const bl = require('bl');
-http.get(process.argv[2], res => {
-  res.pipe(bl((err, data) => {
-    data = data.toString();
-    console.log(data.length);
-    console.log(data);
-  }));
-}).on('error', console.error);
+const result = [];
+const args = process.argv.slice(2);
+const length = args.length;
+args.forEach((arg, index) => {
+  http.get(arg, res => {
+    res.pipe(bl((err, data) => {
+      result[index] = data.toString();
+      if (result.length === length) {
+        result.forEach(value => console.log(value));
+      }
+    }));
+  }).on('error', console.error);
+});
